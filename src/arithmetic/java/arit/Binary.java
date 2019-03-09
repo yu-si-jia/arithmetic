@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Binary {
-//shuzu
+//二进制问题
 }
 
 /**
