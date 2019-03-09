@@ -6,8 +6,6 @@ public class MyStack {
     private int top = 0;
 
 
-
-
     public MyStack(){
     }
 
