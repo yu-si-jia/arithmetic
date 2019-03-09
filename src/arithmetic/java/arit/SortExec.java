@@ -1,9 +1,6 @@
 package arit;
 
-import java.util.Comparator;
-import java.util.Date;
 
-import static java.lang.Math.exp;
 import static java.lang.Math.min;
 import static java.lang.Math.random;
 
