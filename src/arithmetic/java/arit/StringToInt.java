@@ -1,4 +1,4 @@
-package arithstudy;
+package arit;
 
 
 /**
