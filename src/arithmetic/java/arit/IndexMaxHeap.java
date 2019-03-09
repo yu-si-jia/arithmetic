@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class IndexMaxHeap {
 
+    //最大索引堆
     protected int[] data;    // 最大索引堆中的数据
     protected int[] indexes;  // 最大索引堆中的索引, indexes[x] = i 表示索引i在x的位置
     //index构建堆，index开始和reserve一样 index根据数据内容比较，然后保存reserve索引，index顺序会变
