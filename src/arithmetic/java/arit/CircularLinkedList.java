@@ -2,6 +2,7 @@ package arit;
 
 
 public class CircularLinkedList {
+
     private class Node {
         Node next;
         Integer value;
