@@ -17,20 +17,20 @@ public class StringToInt {
                 }
             }
         } else {
-            for (int i = 0; i < str.length&&48 <= str[i] && str[i] <= 57; i++) {
-                    stringBuffer = stringBuffer.append(str[i]);
+            for (int i = 0; i < str.length && 48 <= str[i] && str[i] <= 57; i++) {
+                stringBuffer = stringBuffer.append(str[i]);
             }
         }
 
-            String string = stringBuffer.toString();
+        String string = stringBuffer.toString();
 
-            for (int i = 0; i < string.length(); i++) {
-                sum = sum + Character.getNumericValue(string.charAt(i)) * Math.pow(10, string.length() - i - 1);
-            }
-            if (str[0] == "-".charAt(0)) {
-                sum = sum * -1;
-            } else sum = sum * 1;
-
-            return sum;
+        for (int i = 0; i < string.length(); i++) {
+            sum = sum + Character.getNumericValue(string.charAt(i)) * Math.pow(10, string.length() - i - 1);
         }
+        if (str[0] == "-".charAt(0)) {
+            sum = sum * -1;
+        } else sum = sum * 1;
+
+        return sum;
     }
+}
