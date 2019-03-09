@@ -1,7 +1,6 @@
 package arit;
 
 import java.util.Stack;
-
 /**
  * 用两个栈实现一个队列，完成两个函数appendTail和deletedHead,分别是在队列尾部插入节点
  * 和在队列头部删除节点的功能
