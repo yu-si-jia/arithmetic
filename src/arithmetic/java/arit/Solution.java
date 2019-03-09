@@ -1,6 +1,7 @@
 package arit;
 
 public class Solution {
+
     /**
      * 旋转数组
      * @param array
