@@ -4,7 +4,6 @@ package search;
  * 二分查找
  */
 public class BinaryChop {
-
     /**
      * 迭代法
      * @param target 查找的目标
