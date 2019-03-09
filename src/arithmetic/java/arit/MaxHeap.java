@@ -3,6 +3,7 @@ package arit;
 import java.util.Random;
 
 public class MaxHeap {
+
     private int[] array;//基于堆的完全二叉树
     private int N = 0;//存储在array[1...N]中，array[0]没有使用
     private int maxN;//堆的容量
