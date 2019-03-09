@@ -8,7 +8,6 @@ import java.util.Stack;
  * java实现链表
  */
 
-
 class MyLinkedList {
     private class Node {
         private Integer data;
