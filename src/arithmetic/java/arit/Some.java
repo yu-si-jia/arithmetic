@@ -140,6 +140,11 @@ public class Some {
         return String.valueOf(ch1);
     }
 
+    /**
+     * 计算数的次方
+     * @param power 底数
+     * @param truth 次方
+     */
     public static void computationOfPower(int power,int truth){
         int result = 0;
         for (int i = 0;i<power ; i++){
@@ -220,7 +225,22 @@ public class Some {
      * 小易需要你帮他设计一个投入方案使他最后恰好拥有n个魔法币。
      * 输入描述:
      * 输入包括一行,包括一个正整数n(1 ≤ n ≤ 10^9),表示小易需要的魔法币数量。
-     * 输出描述:
+     * 输出描述:List<String> sameSubString(String str1, String str2) {
+        String subString;
+        List<String> list = new ArrayList<String>();
+        String maxStr = str1.length() > str2.length() ? str1 : str2;
+        String minStr = str1.length() < str2.length() ? str1 : str2;
+        for (int i = minStr.length(); i > 0; i--) {     //控制子串长度i
+            for (int j = 0; j <= minStr.length() - i; j++) {
+                subString = minStr.substring(j, j + i);
+                if (maxStr.contains(subString)) {
+                    list.add(subString);
+                }
+            }
+            if (!list.isEmpty()) return list;
+        }
+        return list;
+    }
      * 输出一个字符串,每个字符表示该次小易选取投入的魔法机器。其中只包含字符'1'和'2'。
      * 输入例子1:
      * 10
@@ -242,11 +262,53 @@ public class Some {
         System.out.println(str.reverse());
     }
 
-
+    /**
+     * 找到已知字符串中出现最多次的子串
+     * 首先找到字符串中出现最多次的1、2位的子串,
+     * 判断这些子串的2、3位是否和1、2位出现次数一样多,以此类推
+     *
+     * @param str 已知字符串
+     */
+    static void mostSubString(String str) {
+        String mostStr = "";
+        //求子串最大的也不会超过原串的一半
+        int[] p1 = new int[str.length() / 2 + 1];
+        int max = 1;//最大次数
+        for (int j = 0; j < str.length() - 1; j++) {
+            int[] p2 = new int[str.length() / 2 + 1];
+            int k = 0;
+            p2[k++] = j;
+            String sub = str.substring(j, j + 2);//前闭后开的区间
+            int count = 1;
+            for (int i = j + 2; i < str.length() - 1; i++) {//从j+2往后找相同子串 并且记录次数
+                String euqalStr = str.substring(i, i + sub.length());
+                if (sub.equals(euqalStr)) {
+                    count++;//记录出现的次数
+                    p2[k++] = i;//？？？？在源数组中的位置
+                    i++;
+                }
+            }
+            if (max < count) {
+                max = count;
+                int i = 0;
+                while (i < count) {
+                    p1[i] = p2[i];//？？？？
+                    i++;
+                }
+                mostStr = sub;
+            } else if (max == count) {
+                boolean isMost = true;
+                for (int i = 0; i < count; i++)
+                    if (!(p1[i] == (p2[i] - mostStr.length() + 1))) isMost = false;
+                if (isMost) mostStr = str.substring(p1[0], p1[0] + mostStr.length() + 1);
+            }
+        }
+        System.out.println(mostStr + "*" + max);
+    }
 
     public static void main(String[] args) {
         int[] a={3,2,1,4,5};
-        Some.test1(a);
+        Some.mostSubString("abcddsdwdekfabcdssddd");
     }
 }
 
