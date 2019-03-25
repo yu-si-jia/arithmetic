@@ -147,9 +147,7 @@ public class Fib {
     public static void main(String[] args) {
         Fib fib = new Fib();
         int[] g = {400,500,200,300,350};
-//        int[] g = {400};
         int[] p = {5,5,3,4,3};
-//        int[] p = {5};
         System.out.println(fib.getMostGold(5,10,g,p));
 
     }
