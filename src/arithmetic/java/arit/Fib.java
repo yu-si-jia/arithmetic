@@ -1,5 +1,6 @@
 package arit;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -118,6 +119,7 @@ public class Fib {
     int getMostGold(int n, int w, int g[], int p[]) {
         int[] preResult = new int[w+1];
         int[] result = new int[w+1];
+        preResult[0] = result[0] = 0;
         //初始化第一行
         for (int i = 0; i<=w; i++) {
             if (i < p[0])
@@ -144,12 +146,51 @@ public class Fib {
     }
 
 
+    /**
+     * 假设有几种硬币，如1、3、5，并且数量无限。请找出能够组成某个数目的找零所使用最少的硬币数。
+     * @param money 总钱数
+     * @param coins 硬币的面值
+     */
+    int test2(int[] coins,int money){
+        int[] result = new int[money+1];
+        Arrays.fill(result,money+1);
+        result[0] = 0;
+         for (int i = 0; i<=money; i++){
+             for (int j = 0; j<coins.length; j++){
+                if (coins[j]<=i) {
+                    int a = result[i];
+                    int b = result[i - coins[j]] + 1;//这个1加的应该是个数
+                    result[i] = Math.min(a, b);
+//                    System.out.println(a+" vs "+b+ "-----result[i]:------"+i+"   "+result[i]);
+
+                }
+             }
+         }
+        return result[money] > money ? -1 : result[money];
+    }
+
+
+    /**
+     * 假设有几种硬币，并且数量无限。请找出能够组成某个数目的找零所有的方案数。
+     * @param coins 硬币的种类
+     * @param money 总钱数
+     * @return
+     */
+    int test3(int[] coins, int money){
+        return 0;
+    }
+
+
+
     public static void main(String[] args) {
         Fib fib = new Fib();
-        int[] g = {400,500,200,300,350};
-        int[] p = {5,5,3,4,3};
-        System.out.println(fib.getMostGold(5,10,g,p));
 
+        int[] test2g = {1,3,5};
+//        System.out.println(fib.test2(test2g,7));
+
+        int[] getMostGoldg = {400,500,200,300,350};
+        int[] getMostGoldp = {5,5,3,4,3};
+//        System.out.println(fib.getMostGold(5,10,getMostGoldg,getMostGoldp));
     }
 }
 
