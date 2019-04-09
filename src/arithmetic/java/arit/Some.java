@@ -3,6 +3,7 @@ package arit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Some {
 
@@ -171,7 +172,6 @@ public class Some {
     class MathAlgorithms {
 
 
-
         int[][] groupSplit(int[] arr, int size) {
             return lastArr(arr, 0, size);
         }
@@ -227,5 +227,115 @@ public class Some {
         }
 
 
+    }
+
+    /**
+     * 第一行输入字符串的个数
+     * 第二行输入字符串
+     * 如果是1 0 挨着就删除，返回删除后的长度
+     * 例子：5
+     * 10110
+     * 1
+     */
+    public static void tecent1() {
+        Scanner scanner = new Scanner(System.in);
+        while ((scanner.hasNext())) {
+            int length = Integer.valueOf(scanner.nextLine());
+            String string = scanner.nextLine();
+            if (string.length() != length) {
+                continue;
+            }
+            if (length == 0 || length == 1) {
+                System.out.println(length);
+                continue;
+            }
+            int start1 = 0, end1 = 0, start2 = 1, end2 = length;
+            while (start2 < end2) {
+                int s = (int) string.charAt(end1);//s,e比较的是ascii码
+                int e = (int) string.charAt(start2);
+                if (s != e) {//第一位和第二位不相等
+                    if (start1 == end1) {//最开始的状态，下标未开始移动
+                        end1 = start2 + 1;//结束的位置是start2+1
+                        start1 = end1;//新开始的位置
+                        start2 += 2;
+                    } else {
+                        end1 = start1;
+                        start2++;
+                    }
+                    length -= 2;
+
+                } else {
+                    start1 = end1;
+                    end1 = start2;
+                    start2++;
+
+                }
+            }
+            System.out.println(length);
+        }
+    }
+
+    public static void tecent2(int n, int[] nums) {
+        if (nums.length != n) {
+            throw new RuntimeException("输入不合法");
+        }
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 0) nums[i] = -1;
+            result += nums[i];
+        }
+
+        if (result < 0) System.out.println(0 - result);
+        if (result > 0) System.out.println(result);
+    }
+
+
+
+    /**
+     * Q去打怪兽，也可以花钱雇佣怪兽，
+     * 例如：3
+     * 8 5 10
+     * 1 1 2
+     * 代表会遇见三个怪兽 武力值分别是8 5 10 雇佣钱数是 1 1 2 武力值不会消耗
+     * 要安全通过雇佣一号和二号怪兽就好 花费2金币
+     * @param n 怪兽数量
+     * @param attack 怪兽武力值
+     * @param price 怪兽价格
+     */
+    public static void tencent(int n, int[] attack, int[] price) {
+        int maxSumP = 0;
+        int maxA = 0;
+        for (int i = 0; i < n; i++) {
+            maxSumP += price[i];
+            if (maxA < attack[i]) {
+                maxA = attack[i];
+            }
+        }
+        int[][] p = new int[n + 1][maxSumP + 1];
+        for (int i = 1; i <= maxSumP; i++) {
+            p[1][i] = attack[0];
+        }
+        for (int i = 2; i <= n; i++) {
+            for (int j = 0; j <= maxSumP; j++) {
+                if (j > price[i - 1]) {//当前拥有的钱数够雇佣当前怪
+                    p[i][j] = p[i-1][j - price[i - 1]] + attack[i - 1];
+                    //当前拥有的钱数-雇佣当前怪的钱数剩下的钱数在打前一个怪时有的武力值+当前怪武力值
+                } else {
+                    p[i][j] = p[i-1][j];//在有j钱数时打i-1怪的武力值
+                }
+            }
+        }
+        for (int i = 1; i < maxSumP; i++) {
+            if (p[n][i] >= maxA) {
+                System.out.println(i);
+                break;
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
+        StringBuffer stringBuffer = new StringBuffer("abc   ");
+        System.out.println(stringBuffer.length());
     }
 }
