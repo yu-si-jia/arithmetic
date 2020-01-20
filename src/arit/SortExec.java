@@ -87,7 +87,7 @@ public class SortExec {
     /**
      * 自顶向下的归并排序
      */
-    public class Merage {
+    class Merage {
         private Comparable[] aux;
 
         public void sort(Comparable[] a) {
@@ -140,7 +140,7 @@ public class SortExec {
     }
 
 
-    public class QuickSort {
+    class QuickSort {
 
         public void sort(Comparable[] a) {
             quickSort(a, 0, a.length - 1);

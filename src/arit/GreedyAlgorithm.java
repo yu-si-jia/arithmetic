@@ -11,7 +11,6 @@ import java.util.Scanner;
  */
 public class GreedyAlgorithm {
     /**
-     *
      * @param coins 硬币面值数组
      * @param money 要找零总钱数
      */
@@ -25,11 +24,24 @@ public class GreedyAlgorithm {
         }
     }
 
-    public static void main(String[] args) {
-        GreedyAlgorithm greedyAlgorithm = new GreedyAlgorithm();
-        int[] coins={5,3,1};
-        greedyAlgorithm.test1(coins,7);
+    /**
+     * 买卖股票的最佳时机，只能持有一股，一天可以买卖无数次，求最大收益
+     * @param arr
+     * @return
+     */
+    int gupiao(int[] arr){
+        int sum = 0;
+        for (int i=0;i+1<arr.length; i++){
+            if (arr[i+1]>arr[i]){
+                sum += arr[i+1]-arr[i];
+            }
+        }
+        return sum;
     }
 
-
+    public static void main(String[] args) {
+        GreedyAlgorithm greedyAlgorithm = new GreedyAlgorithm();
+        int[] arr= {1,2,3,4,5};
+        System.out.println(greedyAlgorithm.gupiao(arr));
+    }
 }

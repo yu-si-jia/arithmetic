@@ -166,17 +166,17 @@ class PrintLinkedList{
 
         public Node(){}
     }
-    public void printReversingLinkedList(Node head){
+    public ArrayList<Integer> printReversingLinkedList(Node head){
         Stack<Node> nodesStack = new Stack<Node>();
-
+        ArrayList<Integer> arrayList = new ArrayList<>();
         while (head!=null){
             nodesStack.push(head);
             head = head.next;
         }
         while (!nodesStack.empty()){
-            System.out.println(nodesStack.pop().k);
+            arrayList.add(nodesStack.pop().k);
         }
-
+        return arrayList;
 
     }
 

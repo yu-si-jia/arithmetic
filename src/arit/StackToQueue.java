@@ -16,7 +16,8 @@ import java.util.Stack;
 
     public Integer deletedHead() throws Exception {
         if(stack2.isEmpty()){
-            while(!stack1.isEmpty()){
+            //判断的重点！！！
+            while(!stack1.isEmpty()){//当栈不为空时才往栈一里面插入
                 stack2.push(stack1.pop());
             }
         }

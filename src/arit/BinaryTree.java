@@ -1,5 +1,9 @@
 package arit;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * 题目：输入某二叉树的前序遍历和中序遍历的结果，
  * 请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
@@ -15,7 +19,8 @@ public class BinaryTree {
     }
 
     /**
-     * 输入某二叉树的前序遍历和中序遍历的结果，请重建出该二节树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+     * 输入某二叉树的前序遍历和中序遍历的结果，请重建出该二节树。
+     * 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
      *
      * @param preorder 前序遍历
      * @param inorder  中序遍历
@@ -23,15 +28,16 @@ public class BinaryTree {
      */
     public static BinaryTreeNode construct(int[] preorder, int[] inorder) {
         // 输入的合法性判断，两个数组都不能为空，并且都有数据，而且数据的数目相同
-        if(preorder == null||inorder == null||preorder.length == inorder.length){
+        if (preorder == null || inorder == null || preorder.length != inorder.length) {
             return null;
         }
-        return construct(preorder,0,preorder.length-1,inorder,0,inorder.length-1);
+        return construct(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
     }
 
     /**
      * 输入某二叉树的前序遍历和中序遍历的结果，请重建出该二节树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
      * 递归调用此方法，前序遍历得到跟结点，从中序遍历中找到跟结点，左右分别为左右子树
+     *
      * @param preorder 前序遍历
      * @param ps       前序遍历的开始位置
      * @param pe       前序遍历的结束位置
@@ -46,7 +52,7 @@ public class BinaryTree {
         if (ps > pe) return null;
         // 取前序遍历的第一个数字，就是当前的根结点
         int rootValue = preorder[ps];
-        int rootIndex = ps;
+        int rootIndex = is;
         // 在中序遍历的数组中找根结点的位置
         while (rootIndex <= ie && inorder[rootIndex] != rootValue) {
             rootIndex++;
@@ -71,6 +77,38 @@ public class BinaryTree {
 
     }
 
+    /**
+     * 给出后序和中序遍历构建二叉树
+     * @param postorder
+     * @param inorder
+     * @return
+     */
+    public static BinaryTreeNode construct1(int[] postorder, int[] inorder) {
+        if (postorder == null || inorder == null || postorder.length != inorder.length) {
+            return null;
+        }
+        return construct(postorder, 0, postorder.length-1, inorder, 0, inorder.length- 1);
+    }
+
+    public static BinaryTreeNode construct1(int[] postorder, int ps, int pe, int[] inorder, int is, int ie) {
+        if (ps > pe) return null;
+        int rootValue = postorder[pe];
+        int rootIndex = is;
+        while (rootIndex <= ie && inorder[rootIndex] != rootValue) {
+            rootIndex++;
+        }
+
+        if (rootIndex > ie) {
+            throw new RuntimeException("Invalid input");
+        }
+
+        BinaryTreeNode node = new BinaryTreeNode();
+        node.value = rootValue;
+        node.left=construct(postorder,ps,ps + rootIndex - is-1, inorder, is, rootIndex - 1);
+        node.right=construct(postorder,ps + rootIndex - is,pe,inorder, rootIndex + 1, ie);
+        return node;
+    }
+
     // 中序遍历二叉树
     public static void printTree(BinaryTreeNode root) {
         if (root != null) {
@@ -80,6 +118,22 @@ public class BinaryTree {
         }
 
     }
+
+    public List<Integer> preorderTraversal(BinaryTreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Stack<BinaryTreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                res.add(root.value);
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            root = root.right;
+        }
+        return res;
+    }
+
 
     // 普通二叉树
     //              1
@@ -166,20 +220,10 @@ public class BinaryTree {
 
 
     public static void main(String[] args) {
+        List <BinaryTreeNode> arr = new ArrayList<>();
+        arr.add(1,null);
 
-        test1();
-        System.out.println();
-        test2();
-        System.out.println();
-        test3();
-        System.out.println();
-        test4();
-        System.out.println();
-        test5();
-//        System.out.println();
-//        test6();
-//        System.out.println();
-//        test7();
 
     }
 }
+
