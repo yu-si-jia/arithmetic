@@ -283,37 +283,6 @@ public class Some {
     }
 
 
-
-
-    /**
-     * 10-17.18
-     * 求一个二进制数有多少个一
-     */
-    int countBit(int num) {
-        int count = 0;
-        while (num != 0) {
-            num = num & (num - 1);
-            count++;
-        }
-        return count;
-    }
-
-    /**
-     * 10-19.20
-     * 快速判断一个数是不是2的x次幂
-     */
-
-    public boolean whether(int num) {
-        int result = num & (num - 1);
-        if (result == 0) {
-            return true;
-        }
-        return false;
-    }
-
-
-
-
     /**
      * 牛客网数星星
      */
@@ -990,6 +959,7 @@ public class Some {
             return list2;
         }
     }
+
 }
 
 
