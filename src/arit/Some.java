@@ -6,125 +6,6 @@ import java.util.*;
 public class Some {
 
     /**
-     * 获取两个字符串的最大相同子串
-     * 解题思路：外层循环是从后往前，内层循环从前往后
-     * 取的元素是定外边界，内层往里走，i+j<minStr
-     * substring取的是前闭后开
-     *
-     * @param str1
-     * @param str2
-     * @return
-     */
-    List<String> longestSameSubString(String str1, String str2) {
-        String str;
-        List<String> list = new ArrayList<>();
-        String maxStr = (str1.length() > str2.length()) ? str1 : str2;
-        String minStr = maxStr.equals(str1) ? str2 : str1;
-        /*
-         * 因为取的是最长子串，每一轮外层循环结束后就要把被匹配的长度-1(即i),i 是逐级递加的
-         */
-        for (int i = minStr.length(); i > 0; i--) {
-            for (int j = 0; j + i <= minStr.length(); j++) {//j是初始位置，j+i是要取得的子串长度，不能超过最短的那个串
-                str = minStr.substring(j, j + i);  //取的是j+1,j+i位置的子串，j是索引，取后面的一位
-                if (maxStr.contains(str)) {
-                    list.add(str);
-                }
-            }
-            if (!list.isEmpty())//判断集合是否是空的
-                return list;//如果没有此判断条件，所有循环取出来的字符都会添加到集合里
-        }
-        return list;
-    }
-
-    /**
-     * 找到已知字符串中出现最多次的子串
-     * 解题思路：首先找到字符串中出现最多次的1、2位的子串,
-     * 判断这些子串的2、3位是否和1、2位出现次数一样多,以此类推
-     * 两个两个判断，最后从子串开始的位置取，取次数最多的子串的长度
-     * 截取出现最多的字符串
-     * mostStr = str.substring(p1[0], p1[0] + mostStr.length() + 1);
-     *
-     * @param str 已知字符串
-     */
-    void mostSubString(String str) {
-        String mostStr = "";
-        //求子串最大的也不会超过原串的一半
-        int[] p1 = new int[str.length() / 2 + 1];
-        //最大次数
-        int max = 1;
-        //取子串
-        for (int j = 0; j < str.length() - 1; j++) {
-            int p2[] = new int[str.length() / 2 + 1];//p2记录每一次子串出现的位置
-            int k = 0;
-            p2[k++] = j;//记录子串开始时的位置
-            String sub = str.substring(j, j + 2);//前闭后开的区间
-            int count = 1;//出现的次数
-            for (int i = j + 2; i < str.length() - 1; i++) {// 从j+2往后找相同子串 并且记录次数
-                String sub2 = str.substring(i, sub.length() + i);
-                if (sub.equals(sub2)) {
-                    //记录子串出现的次数
-                    count += count;
-                    p2[k++] = i;//记录子串第一次出现的位置
-                    i++;
-                }
-            }
-
-            if (max < count) {
-                max = count;
-                int i = 0;
-                while (i < count) {
-                    p1[i] = p2[i];//告诉p1 第一个相同子串出现的位置
-                    i++;
-                }
-
-                mostStr = sub;
-            } else if (max == count) {
-                boolean isMost = true;
-                for (int i = 0; i < count; i++)
-                    if (!(p1[i] == (p2[i] - mostStr.length() + 1))) isMost = false;
-                if (isMost) {
-                    //每次取的是俩子串，挨着的俩相同，如果是abc情况的话 ab,bc是连着的 取记录在p2数组里的位置的子串
-                    mostStr = str.substring(p1[0], p1[0] + mostStr.length() + 1);
-                }
-            }
-        }
-        System.out.println(mostStr + "*" + max);
-
-    }
-
-
-    /**
-     * 题目描述
-     * 给定一个长度为n的整数数组a，元素均不相同，问数组是否存在这样一个片段，只将该片段翻转就可以使整个数组升序排列。
-     * 其中数组片段[l,r]表示序列a[l], a[l+1], ..., a[r]。原始数组为
-     * a[1], a[2], ..., a[l-2], a[l-1], a[l], a[l+1], ..., a[r-1], a[r], a[r+1], a[r+2], ..., a[n-1], a[n]，
-     * 将片段[l,r]反序后的数组是
-     * a[1], a[2], ..., a[l-2], a[l-1], a[r], a[r-1], ..., a[l+1], a[l], a[r+1], a[r+2], ..., a[n-1], a[n]。
-     * 解题思路：将数组排好序，与原数组做对比，左右指针，计算到不相同的地方，在做对比
-     */
-    void arrayTest(int[] array) {
-        int len = array.length;
-        int[] copyArray = new int[len];
-        for (int i = 0; i < len; i++) {
-            copyArray[i] = array[i];
-        }
-        Arrays.sort(copyArray);
-        int left = 0, right = len - 1;
-        //这俩步是找到排好顺序的数组和没有排好顺序的数组左右各是从第几个元素不相同的
-        while (left < len && copyArray[left] == array[left]) left++;
-        while (right >= 0 && copyArray[right] == array[right]) right--;
-        int i;
-        for (i = 0; i <= right - left; i++) {
-            if (copyArray[left + i] != array[right - i])
-                break;
-        }
-        if (i > right - left)
-            System.out.println("yes");
-        else
-            System.out.println("no");
-    }
-
-    /**
      * 将约德尔人的历史的每个阶段都用一个字符表达出来。(包括可写字符,不包括空格。)。
      * 然后将这个字符串转化为一个01串。转化规则是如果这个字符如果是字母或者数字，这个字符变为1,其它变为0。
      * 然后将这个01串和黑默丁格观测星空得到的01串做比较，得到一个相似率。相似率越高,则约德尔的未来越光明。
@@ -157,48 +38,7 @@ public class Some {
     }
 
 
-    /**
-     * 10-15.16
-     * 有两个排好虚的数组A1,A2  内存在A1末尾有足够多的空间容纳A2
-     * 实现一个函数把A2中的所有数字插入到A1中并且所有的数字都是有序的
-     * 解题思路：可分为从前比较的做法，和从后比较
-     * 从后比较，设置两个指针i,j分别指向a1与a2的最后一个元素，选择大的放入result result--才能保证不撞车
-     * 当a2和a1任意一个数组放入完毕，另一个就全部放入result
-     */
-    void merge(int[] arr1, int[] arr2) {
-        int len1 = arr1.length;
-        int len2 = arr2.length;
-        int len = len1 + len2;
-        int arr[] = new int[len];
-        int j = len1 - 1;
-        int i = len2 - 1;
-        len--;
-        while (i >= 0 && j >= 0) {
-            //从后向前比较
-            if (arr2[i] > arr1[j]) {
-                //将第二个数组的最后第i个元素放入arr中
-                arr[len--] = arr2[i];
-                i--;//“指针”后移一位
-            } else if (arr2[i] <= arr1[j]) {
-                //将第一个数组的最后第i个元素放入arr中
-                arr[len--] = arr1[j];
-                j--;//“指针”后移一位
-            }
-        }
-        if (i > j) {
-            //将剩余的数组1或者数组2的元素全部追加到数组arr
-            while (i >= 0) {
-                arr[len--] = arr2[i--];
-            }
-        } else {
-            while (j >= 0) {
-                arr[len--] = arr1[j--];
-            }
-        }
-        for (int k = 0; k < arr.length; k++) {
-            System.out.print(arr[k] + " ");
-        }
-    }
+
 
     /**
      * 给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
@@ -225,79 +65,6 @@ public class Some {
         return power2(base, exponent - 1) * base;
     }
 
-
-    /**
-     * 旋转数组:把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
-     * 输入一个非减排序的数组的一个旋转，输出旋转数组的最小元素。
-     * 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
-     * NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
-     *
-     * @param array
-     * @return
-     */
-    public int minNumberInRotateArray(int[] array) {
-        if (array == null || array.length == 0) {
-            return 0;
-        }
-        int p1 = 0;//从前往后走
-        int p2 = array.length - 1;//从后往前走
-        int min = array[p1];//如果没发生旋转，直接将array[0]的值返回，
-        int mid = 0;
-        //当数组发生旋转了，
-        while (array[p1] > array[p2]) {
-            //当两个指针走到挨着的位置时，p2就是最小数了
-            if (p2 - p1 == 1) {
-                min = array[p2];
-                break;
-            }
-            mid = (p1 + p2) / 2;
-            //如果中间位置的数既等于p1位置的数又等于P2位置的数
-            if (array[p1] == array[mid] && array[p2] == array[mid]) {
-                min = minInorder(array, p1, p2);
-            }
-            //若中间位置的数位于数组1，让p1走到mid的位置
-            if (array[mid] > array[p1]) {
-                p1 = mid;
-            }
-            //若中间位置的数位于数组2，让p2走到mid的位置
-            if (array[mid] < array[p1]) {
-                p2 = mid;
-            }
-
-
-        }
-        return min;
-    }
-
-    private int minInorder(int[] array, int p1, int p2) {
-        int min = array[p1];
-        for (int i = p1 + 1; i <= p2; i++) {
-            if (min > array[i]) {
-                min = array[i];
-            }
-        }
-        return min;
-    }
-
-
-    public int minNumberInRotateArray1(int[] array) {
-        if (array.length == 0) {
-            return 0;
-        }
-        if (array.length == 1) {
-            return array[0];
-        }
-        for (int i = 0; i < array.length - 1; i++) {
-            if (array[i] > array[i + 1]) {
-                return array[i + 1];
-            } else {
-                if (i == array.length - 2) {
-                    return array[0];
-                }
-            }
-        }
-        return 0;
-    }
 
 
     /**
@@ -393,66 +160,8 @@ public class Some {
     }
 
 
-    /**
-     * 第一行输入字符串的个数
-     * 第二行输入字符串
-     * 如果是1 0 挨着就删除，返回删除后的长度
-     * 例子：5
-     * 11110000
-     * 1
-     */
 
-    public static void tecent1() {
-        Scanner scanner = new Scanner(System.in);
-        while ((scanner.hasNext())) {
-            int length = Integer.valueOf(scanner.nextLine());
-            String string = scanner.nextLine();
-            if (string.length() != length) {
-                continue;
-            }
-            if (length == 0 || length == 1) {
-                System.out.println(length);
-                continue;
-            }
-            int start1 = 0, end1 = 0, start2 = 1, end2 = length;
-            while (start2 < end2) {
-                int s = (int) string.charAt(end1);//s,e比较的是ascii码
-                int e = (int) string.charAt(start2);
-                if (s != e) {//第一位和第二位不相等
-                    if (start1 == end1) {//最开始的状态，下标未开始移动
-                        end1 = start2 + 1;//结束的位置是start2+1
-                        start1 = end1;//新开始的位置
-                        start2 += 2;
-                    } else {
-                        end1 = start1;
-                        start2++;
-                    }
-                    length -= 2;
 
-                } else {
-                    start1 = end1;
-                    end1 = start2;
-                    start2++;
-
-                }
-            }
-            System.out.println(length);
-        }
-    }
-
-    public static void tecent2(int n, int[] nums) {
-        if (nums.length != n) {
-            throw new RuntimeException("输入不合法");
-        }
-        int result = 0;
-        for (int i = 0; i < n; i++) {
-            if (nums[i] == 0) nums[i] = -1;
-            result += nums[i];
-        }
-
-        if (result < 0) System.out.println(0 - result);
-        if (result > 0) System.out.println(result);
-    }
 
 
     /**
@@ -574,43 +283,6 @@ public class Some {
     }
 
 
-    /**
-     * 在一个二维数组中，每一行都按照从左到右递增的顺序排列
-     * 每一列都按照从上到下递增的顺序排序
-     * 完成一个函数，输入这样的二维数组和一个整数
-     * 判断数组是否含有整数
-     */
-    public boolean Find(int target, int[][] array) {
-        int rows = array.length;
-        int col = array[0].length;
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < col; j++) {
-                if (target == array[i][j]) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    //根据有序的特性进行查找
-    /*从左下角开始查找，大于左下角删除一行，小于左下角删除一列*/
-    public boolean Find2(int target, int[][] array) {
-
-        for (int i = array.length - 1, j = 0; i >= 0 && j < array[0].length; ) {//控制循环
-            if (target == array[i][j]) {
-                return true;
-            } else if (target > array[i][j]) {
-                j++;
-                continue;
-            } else if (target < array[i][j]) {
-                i--;
-                continue;
-            }
-        }
-        return false;
-    }
 
 
     /**
@@ -640,32 +312,6 @@ public class Some {
     }
 
 
-    /**
-     * 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，
-     * 使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，
-     * 并保证奇数和奇数，偶数和偶数之间的相对位置不变。
-     */
-    public int[] reOrderArray(int[] array) {
-        int i, j, m = 0, n = array.length - 1;
-        int[] result = new int[array.length];
-        for (i = 0; i < array.length; i++) {
-            if (array[i] % 2 != 0) {
-                result[m] = array[i];
-                m++;
-            }
-
-        }
-        for (j = array.length - 1; j >= 0; j--) {
-            if (array[j] % 2 == 0) {
-                result[n] = array[j];
-                n--;
-            }
-        }
-        for (i = 0; i < array.length; i++) {
-            array[i] = result[i];
-        }
-        return array;
-    }
 
 
     /**
