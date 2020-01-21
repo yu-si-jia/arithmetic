@@ -3,7 +3,7 @@ package arit;
 /**
  * @author YuSiJia
  * @date 2020/1/20
- * @desc 异或算法
+ * @desc 异或算法，两个相同异或为0  多适用于找不同
  */
 public class Xor {
     /**
@@ -11,7 +11,12 @@ public class Xor {
      * 其余每个元素均出现两次。找出那个只出现了一次的元素。
      */
     public static int getOnce(int[] arr){
-
+        int result = arr[0];
+        for(int i=1 ;i<arr.length; i++){
+            int a = arr[i];
+            result = result ^ a;
+        }
+        return result;
     }
 
 
