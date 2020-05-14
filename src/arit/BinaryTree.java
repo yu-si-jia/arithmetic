@@ -225,5 +225,37 @@ public class BinaryTree {
 
 
     }
+
+
+    public int getTreeHeight (TreeNode root) {
+        // write code here
+        if(root == null){
+            return 0;
+        }
+        return Math.max(getTreeHeight(root.left),getTreeHeight((root.right))+1);
+    }
+
+    public Some.ListNode revertLinkList (Some.ListNode root) {
+        // write code here
+        Stack<Some.ListNode> stack = new Stack<>();
+        if (root == null){
+            return null;
+        }
+        while (root!=null){
+            stack.push(root);
+            root = root.next;
+        }
+        if (!stack.isEmpty()){
+            root = stack.pop();
+        }
+        Some.ListNode cur = root;
+        while (!stack.isEmpty()){
+            Some.ListNode node = stack.pop();
+            node.next = null;
+            cur.next = node;
+            cur = node;
+        }
+        return root;
+    }
 }
 

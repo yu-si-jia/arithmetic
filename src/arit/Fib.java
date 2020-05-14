@@ -246,10 +246,6 @@ public class Fib {
         System.out.println(dp[m - 1][n - 1]);
     }
 
-    public static void main(String[] args) {
-        Fib fib = new Fib();
-        fib.getMinDistince(3,3);
-    }
 
     /**
      * Q去打怪兽，也可以花钱雇佣怪兽，
@@ -292,6 +288,52 @@ public class Fib {
                 break;
             }
         }
+    }
+
+    // 时间复杂度 O(nlogn)
+    public int findKth(int[] arr, int k) {
+        int oSize = 0;
+        int[] sArr = new int[arr.length];
+        for (int num : arr) {
+            if (num % 2 == 1) {
+                // 遍历，将奇数放置sArr数组中，去除偶数
+                sArr[oSize++] = num;
+            }
+        }
+        if (oSize < k) {
+            return 0;
+        }
+        // 根据快速排序的思想，将大于temp和小于temp的分开，看第K小在哪一边，再依次进行递归
+        return findKth(sArr, k, 0, oSize - 1);
+    }
+    private int findKth(int[] sArr, int k, int start, int end) {
+        int low = start;
+        int high = end;
+        int temp = sArr[low];
+        while (low < high) {
+            while (low < high && sArr[high] >= temp) {
+                high--;
+            }
+            sArr[low] = sArr[high];
+            while (low < high && sArr[low] < temp) {
+                low++;
+            }
+            sArr[high] = sArr[low];
+        }
+        sArr[high] = temp;
+        if (high == k - 1) {
+            return temp;
+        } else if (high > k - 1) {
+            return findKth(sArr, k, start, high - 1);
+        } else {
+            return findKth(sArr, k, high + 1, end);
+        }
+    }
+
+    public static void main(String[] args) {
+        Fib fib = new Fib();
+        int[] a = {3,4,5,67,4,3,4,5,78,6,66,7};
+        fib.findKth(a,3);
     }
 
 }
