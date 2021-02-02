@@ -1,4 +1,4 @@
-package leetcode.dp.max_sub_array;
+package leetcode.maxSubArray_53;
 
 /**
  * @author YuSiJia

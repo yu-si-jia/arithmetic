@@ -1,0 +1,46 @@
+package arithstudy.arr;
+
+/**
+ * @author andor
+ * @date 2021/1/25
+ * @desc 27. 移除元素
+ */
+public class RemoveElement {
+
+    public int removeElement1(int[] nums, int val) {
+        int slow = 0, fast = 0;
+        for (; fast < nums.length; fast++) {
+            if (nums[fast] != val) {
+                nums[slow] = nums[fast];
+                slow++;
+            }
+        }
+        return slow;
+    }
+
+    public int removeElement(int[] nums, int val) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            while (nums[right] != val) {
+                if (nums[left] == val) {
+                    int temp = nums[right];
+                    nums[right] = nums[left];
+                    nums[left] = temp;
+                    right--;
+                    left++;
+                }
+                left++;
+            }
+            right--;
+        }
+        return right-1;
+    }
+
+    public static void main(String[] args) {
+        RemoveElement removeElement = new RemoveElement();
+        int[] nums={3,2,2,3};
+        System.out.println(removeElement.removeElement(nums,3));
+    }
+
+}

@@ -31,4 +31,9 @@ public class Test01 {
         }
         return Math.max(sum[nums.length - 1], sum[nums.length - 2]);
     }
+
+    public static void main(String[] args) {
+        int[] a = {1,2,3,4,5};
+        System.out.println(new Test01().massage(a));
+    }
 }

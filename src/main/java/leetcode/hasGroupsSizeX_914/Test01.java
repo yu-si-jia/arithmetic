@@ -1,9 +1,4 @@
-package leetcode.has_groups_size_x;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package leetcode.hasGroupsSizeX_914;
 
 /**
  * @author YuSiJia
