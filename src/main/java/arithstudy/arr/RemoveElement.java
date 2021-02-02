@@ -20,21 +20,16 @@ public class RemoveElement {
 
     public int removeElement(int[] nums, int val) {
         int left = 0;
-        int right = nums.length - 1;
+        int right = nums.length;
         while (left < right) {
-            while (nums[right] != val) {
-                if (nums[left] == val) {
-                    int temp = nums[right];
-                    nums[right] = nums[left];
-                    nums[left] = temp;
-                    right--;
-                    left++;
-                }
+            if (nums[left] == val) {
+                nums[left] = nums[right-1];
+                right--;
+            }else {
                 left++;
             }
-            right--;
         }
-        return right-1;
+        return right;
     }
 
     public static void main(String[] args) {
