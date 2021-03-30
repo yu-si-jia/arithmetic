@@ -19,6 +19,7 @@ public class RemoveElement {
     }
 
     public int removeElement(int[] nums, int val) {
+         
         int left = 0;
         int right = nums.length;
         while (left < right) {
