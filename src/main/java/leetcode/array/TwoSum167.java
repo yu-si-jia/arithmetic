@@ -1,11 +1,11 @@
-package leetcode.twosum_167;
+package leetcode.array;
 
 /**
  * @author andor
  * @date 2021/5/18
  * @desc
  */
-public class Solution {
+public class TwoSum167 {
     public int[] twoSum(int[] numbers, int target) {
         int[] result = new int[2];
         int left = 0;
@@ -25,6 +25,6 @@ public class Solution {
 
     public static void main(String[] args) {
         int[] nums = {2,7,11,15};
-        new Solution().twoSum(nums,9);
+        new TwoSum167().twoSum(nums,9);
     }
 }
