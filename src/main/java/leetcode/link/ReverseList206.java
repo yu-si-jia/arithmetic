@@ -19,6 +19,18 @@ public class ReverseList206 {
 
     }
 
+
+    public static ListNode reverseList2(ListNode head) {
+        if (head == null || head.next == null){
+            return head;
+        }
+        ListNode newHead = reverseList2(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+
+    }
+
     public static void main(String[] args) {
         ListNode a = new ListNode(5,null);
         ListNode b = new ListNode(4,a);
@@ -26,25 +38,7 @@ public class ReverseList206 {
         ListNode d = new ListNode(2,c);
         ListNode e = new ListNode(1,d);
 
-        reverseList(e);
+        reverseList2(e);
 
-    }
-
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
     }
 }
