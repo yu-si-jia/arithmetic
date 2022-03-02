@@ -1,7 +1,7 @@
-package leetcode.three_dimensional_shape;
+package leetcode;
 
 /**
- * @author YuSiJia
+ * @author YuSiJia 892
  * @date 2020/3/25
  * @desc 在 N * N 的网格上，我们放置一些 1 * 1 * 1  的立方体。
  * <p>
@@ -28,7 +28,7 @@ package leetcode.three_dimensional_shape;
  * 输入：[[2,2,2],[2,1,2],[2,2,2]]
  * 输出：46
  */
-public class Test01 {
+public class SurfaceArea_892 {
     public int surfaceArea(int[][] grid) {
         int m = grid.length;
         int n = grid[0].length;

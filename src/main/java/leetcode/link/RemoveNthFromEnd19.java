@@ -29,14 +29,6 @@ public class RemoveNthFromEnd19 {
         return dump.next;
     }
 
-    public static void main(String[] args) {
-         ListNode a = new  ListNode(5,null);
-         ListNode b = new  ListNode(4,a);
-         ListNode c = new  ListNode(3,b);
-         ListNode d = new  ListNode(2,c);
-         ListNode e = new  ListNode(1,d);
-         removeNthFromEnd(e,3);
-    }
 
     public ListNode removeNthFromEnd1(ListNode head, int n) {
         int length = getNodeLength(head);

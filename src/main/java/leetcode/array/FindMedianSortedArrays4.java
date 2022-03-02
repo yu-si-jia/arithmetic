@@ -21,10 +21,15 @@ public class FindMedianSortedArrays4 {
                 right = nums2[bStart++];
             }
         }
+        // len是2的倍数
         if ((len & 1) == 0)
             return (left + right) / 2.0;
         else
             return right;
 
+    }
+
+    public static void main(String[] args) {
+        System.out.println(4&1);
     }
 }
