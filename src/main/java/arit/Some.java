@@ -531,37 +531,6 @@ public class Some {
         return first.next;
     }
 
-    /**
-     * 判断括号是否合法
-     *
-     * @param s
-     * @return
-     */
-    public boolean isValid(String s) {
-        Stack sk = new Stack();
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[') {
-                sk.push(s.charAt(i));
-
-            } else {
-                if (sk.isEmpty())
-                    return false;
-                if (s.charAt(i) == ')' && (char) sk.peek() != '(')
-                    return false;
-                else if (s.charAt(i) == ']' && (char) sk.peek() != '[')
-                    return false;
-                else if (s.charAt(i) == '}' && (char) sk.peek() != '{')
-                    return false;
-                sk.pop();
-            }
-
-        }
-
-        if (sk.isEmpty())
-            return true;
-        else
-            return false;
-    }
 
     /**
      * 获取第k大的元素
