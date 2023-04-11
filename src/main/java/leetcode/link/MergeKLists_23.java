@@ -1,15 +1,16 @@
 package leetcode.link;
 
-import java.util.List;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * @author ysj
  * @date 2021/9/7
  * @desc 23. 合并K个升序链表
  */
-public class MergeKLists {
+public class MergeKLists_23 {
 
-    public ListNode mergeLists(ListNode[] lists) {
+    public ListNode mergeLists1(ListNode[] lists) {
         ListNode ans = null;
 
         for (int i = 0; i < lists.length; i++) {
@@ -18,21 +19,29 @@ public class MergeKLists {
         return ans;
     }
 
-//    public ListNode mergeKLists(ListNode[] lists) {
-//        return merge(lists, 0, lists.length);
-//
-//    }
-//
-//    public ListNode merge(ListNode[] lists, int l, int r) {
-//        if (l == r) {
-//            return lists[l];
-//        }
-//        if (l > r) {
-//            return null;
-//        }
-//        int mid = (l + r) / 2;
-//        return merge2Lists(merge(lists, l, mid), merge(lists, mid + 1, r));
-//    }
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists.length == 0) {
+            return null;
+        }
+        ListNode dump = new ListNode(-1);
+        ListNode p = dump;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(
+                lists.length, Comparator.comparingInt(a -> a.val));
+        for (ListNode head : lists) {
+            if (head != null) {
+                pq.add(head);
+            }
+        }
+        while (!pq.isEmpty()) {
+            ListNode node = pq.poll();
+            p.next = node;
+            if (node.next != null) {
+                pq.add(node.next);
+            }
+            p = p.next;
+        }
+        return dump.next;
+    }
 
     public ListNode merge2Lists(ListNode listNode1, ListNode listNode2) {
         if (listNode1 == null || listNode2 == null) {
