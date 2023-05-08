@@ -11,7 +11,7 @@ public class DiameterOfBinaryTree_543 {
     int max = 0;
 
     public int diameterOfBinaryTree(TreeNode root) {
-        if (root==null){
+        if (root == null) {
             return max;
         }
         def(root);
