@@ -6,9 +6,9 @@ package leetcode.tree;
  * @desc 二叉树的遍历 94；102；144；145987；107
  */
 public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
 
     TreeNode() {
     }
