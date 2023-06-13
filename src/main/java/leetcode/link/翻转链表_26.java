@@ -5,15 +5,15 @@ package leetcode.link;
  * @date 2021/6/24
  * @desc 206. 反转链表
  */
-public class ReverseList206 {
+public class 翻转链表_26 {
     public static ListNode reverseList(ListNode head) {
         ListNode prev = null;
         ListNode curr = head;
-        while (curr!=null){
-            ListNode nodeTemp = curr.next;
+        while (curr != null){
+            ListNode temp = curr.next;
             curr.next = prev;
             prev = curr;
-            curr = nodeTemp;
+            curr = temp;
         }
         return prev;
 
