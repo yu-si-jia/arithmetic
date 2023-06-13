@@ -1,4 +1,4 @@
-package leetcode.link;
+package leetcode.链表;
 
 /**
  * @author ysj

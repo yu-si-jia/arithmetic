@@ -1,8 +1,7 @@
-package leetcode.link;
+package leetcode.链表;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author ysj
