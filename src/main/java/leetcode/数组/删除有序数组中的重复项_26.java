@@ -1,15 +1,15 @@
-package leetcode.array;
+package leetcode.数组;
 
 /**
  * @author andor
  * @date 2021/6/3
  * @desc 26. 删除有序数组中的重复项
  */
-public class RemoveDuplicates26 {
+public class 删除有序数组中的重复项_26 {
     public static void main(String[] args) {
-        RemoveDuplicates26 removeDuplicates26 = new RemoveDuplicates26();
+        删除有序数组中的重复项_26 删除有序数组中的重复项26 = new 删除有序数组中的重复项_26();
         int[] a = {1, 2, 2, 3, 4};
-        System.out.println(removeDuplicates26.removeDuplicates(a));
+        System.out.println(删除有序数组中的重复项26.removeDuplicates(a));
     }
 
     public int removeDuplicates(int[] nums) {

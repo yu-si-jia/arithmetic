@@ -1,4 +1,4 @@
-package leetcode.array;
+package leetcode.数组;
 
 /**
  * @author ysj
