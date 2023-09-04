@@ -1,4 +1,4 @@
-package leetcode.tree;
+package leetcode.二叉树;
 
 /**
  * @author HeJiageng
