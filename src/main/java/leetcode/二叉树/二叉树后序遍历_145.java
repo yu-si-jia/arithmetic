@@ -7,7 +7,7 @@ import java.util.*;
  * @date 2023/2/1
  * @desc 后续
  */
-public class PostorderTraversal_145 {
+public class 二叉树后序遍历_145 {
 
     public List<Integer> postorderTraversal1(TreeNode root) {
         List<Integer> res = new ArrayList<>();

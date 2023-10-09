@@ -7,7 +7,7 @@ import java.util.*;
  * @date 2023/1/31
  * @desc 94. 二叉树的中序遍历
  */
-public class InorderTraversal_94 {
+public class 二叉树中序遍历_94 {
 
     public List<Integer> inorderTraversal1(TreeNode root) {
         List<Integer> result = new ArrayList<>();

@@ -7,7 +7,7 @@ package leetcode.二叉树;
  * 递归，算左右两个支最大值，并及时更新全局变量
  * 遍历每一个节点，以每一个节点为中心点计算最长路径（左子树边长+右子树边长），更新全局变量max。
  */
-public class DiameterOfBinaryTree_543 {
+public class 二叉树的直径_543 {
     int max = 0;
 
     public int diameterOfBinaryTree(TreeNode root) {

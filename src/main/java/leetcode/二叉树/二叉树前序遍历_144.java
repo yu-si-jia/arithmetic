@@ -10,7 +10,7 @@ import java.util.List;
  * @date 2023/1/31
  * @desc
  */
-public class PreorderTraversal_144 {
+public class 二叉树前序遍历_144 {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         preorder(root, res);

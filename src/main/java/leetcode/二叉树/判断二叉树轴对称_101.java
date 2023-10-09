@@ -10,7 +10,7 @@ package leetcode.二叉树;
  * def 函数A（左树，右树）：
  * 左树节点值等于右树节点值 且 函数A（左树的左子树，右树的右子树），函数A（左树的右子树，右树的左子树）均为真 才返回真
  */
-public class IsSymmetric_101 {
+public class 判断二叉树轴对称_101 {
     public boolean isSymmetric(TreeNode root) {
 
         if (root==null){

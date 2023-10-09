@@ -5,7 +5,7 @@ package leetcode.二叉树;
  * @date 2023/3/15
  * @desc 617 合并二叉树
  */
-public class MergeTrees_617 {
+public class 合并二叉树_617 {
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if (root1 == null) {
             return root2;

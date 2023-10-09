@@ -1,4 +1,4 @@
-package leetcode.二叉树.dp;
+package leetcode.二叉树;
 
 import leetcode.二叉树.TreeNode;
 
@@ -10,7 +10,7 @@ import java.util.Queue;
  * @date 2023/5/8
  * @desc 112. 路径总和
  */
-public class HasPathSum_112 {
+public class 二叉树路径和_112 {
     public boolean hasPathSum1(TreeNode root, int targetSum) {
         if (root == null) {
             return false;
