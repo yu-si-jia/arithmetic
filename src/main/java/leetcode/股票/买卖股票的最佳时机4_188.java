@@ -6,12 +6,12 @@ package leetcode.股票;
  * @desc
  */
 public class 买卖股票的最佳时机4_188 {
-    public static int maxProfit(int[] prices,int k) {
+    public int maxProfit(int[] prices,int k) {
         int n = prices.length;
 
         // 代表K没有限制
         if (k > n / 2) {
-            return maxProfit1(prices);
+            return maxProfit(prices);
         } else {
             // k 有限制
             int[][][] dp = new int[n][k + 1][2];
@@ -52,9 +52,4 @@ public class 买卖股票的最佳时机4_188 {
         return dp[n-1][0];
     }
 
-
-    public static void main(String[] args) {
-        int[] test = {2,4,1};
-        买卖股票的最佳时机4_188.maxProfit(test, 2);
-    }
 }
