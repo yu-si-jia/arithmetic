@@ -5,9 +5,11 @@ package leetcode.链表;
  * @date 2023/1/22
  * @desc 82 给定一个已排序的链表的头 head ， 删除原始链表中所有重复数字的节点，只留下不同的数字 。返回已排序的链表 。
  */
-public class DeleteDuplicates1_82 {
+public class 删除排序链表中的重复元素_82 {
     public ListNode deleteDuplicates(ListNode head) {
-        if (head == null || head.next == null) return head;
+        if (head == null || head.next == null) {
+            return head;
+        }
         ListNode dummy = new ListNode(-1, head);
         ListNode cur = dummy;
 
@@ -36,6 +38,6 @@ public class DeleteDuplicates1_82 {
         node3.next = node4;
         node4.next = node5;
         node5.next = node6;
-        new DeleteDuplicates1_82().deleteDuplicates(node1);
+        new 删除排序链表中的重复元素_82().deleteDuplicates(node1);
     }
 }
